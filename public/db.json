@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "name": "Bag",
+        "img": "https://i.ibb.co/0GpM3WW/bag.jpg",
+        "desc" : "This is a bag. Lorem ipsum dolor sit amet consectetur, adipisicing elit. A, consequuntur!",
+        "price" : "10" 
+    },
+    {
+        "id": "2",
+        "name": "shoe",
+        "img": "https://i.ibb.co/J3mBLqN/shoe.jpg",
+        "desc" : "This is a shoe. Lorem ipsum dolor sit amet consectetur, adipisicing elit. A, consequuntur!",
+        "price" : "20" 
+    },
+    {
+        "id": "3",
+        "name": "Bike",
+        "img": "https://i.ibb.co/LC4Xpxb/bike.jpg",
+        "desc" : "This is a Bike. Lorem ipsum dolor sit amet consectetur, adipisicing elit. A, consequuntur!",
+        "price" : "500" 
+    },
+    {
+        "id": "4",
+        "name": "Mask",
+        "img": "https://i.ibb.co/RSy2ZW0/mask.jpg",
+        "desc" : "This is a mask. Lorem ipsum dolor sit amet consectetur, adipisicing elit. A, consequuntur!",
+        "price" : "4" 
+    },
+    {
+        "id": "5",
+        "name": "Watch",
+        "img": "https://i.ibb.co/Kr9LMvg/watch.jpg",
+        "desc" : "This is a watch. Lorem ipsum dolor sit amet consectetur, adipisicing elit. A, consequuntur!",
+        "price" : "70" 
+    }
+]
+

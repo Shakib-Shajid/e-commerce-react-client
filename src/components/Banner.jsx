@@ -8,6 +8,8 @@ import bag from '/bag.jpg'
 import pair from '/pair-shoe.jpg'
 import bike from '/bike.jpg'
 import shoe from '/shoe.jpg'
+import mask from '/mask.jpg'
+import watch from '/watch.jpg'
 
 const Banner = () => {
     const [sliderRef] = useKeenSlider({

@@ -4,9 +4,9 @@ const Navbar = () => {
 
     const navLink = 
     <>
-        <li><Link to="">Item 1</Link></li>
-        <li><Link to="">Item 2</Link></li>
-        <li><Link to="">Item 3</Link></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/cart">Add Cart</Link></li>
     </>
     return (
         <div>
@@ -33,7 +33,7 @@ const Navbar = () => {
                             {navLink}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <a className="btn btn-ghost text-xl">E-Commerce</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -41,7 +41,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Login</a>
+                    <Link to="/login" className="btn btn-success text-white">Login</Link>
                 </div>
             </div>
         </div>
