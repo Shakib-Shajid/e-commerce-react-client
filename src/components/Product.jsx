@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Product = () => {
@@ -5,10 +6,17 @@ const Product = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
-            .then(res => res.json())
-            .then(data => setProducts(data))
+
+        // .....................................................
+        axios.get('http://localhost:5000/products')
+        // .then(data=>setProducts(data.data))
+        .then(data=>setProducts(data.data))
+        // .....................................................
+
+
     }, [])
+
+  
     return (
         <div>
             <h3 className="text-2xl md:text-5xl font-bold text-center my-3 md:my-10">Products</h3>
