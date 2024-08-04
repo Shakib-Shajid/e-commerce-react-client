@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Product = () => {
 
@@ -16,6 +17,8 @@ const Product = () => {
 
     }, [])
 
+   
+
   
     return (
         <div>
@@ -24,7 +27,7 @@ const Product = () => {
 
                 {
                     products.map(product =>
-                        <div className="card card-compact bg-base-100 w-80 shadow-xl" key={product.id}>
+                        <div className="card card-compact bg-base-100 w-80 shadow-xl" key={product._id}>
                             <figure>
                                 <img
                                     src={product.img}
@@ -34,7 +37,7 @@ const Product = () => {
                                 <h2 className="card-title">{product.name}</h2>
                                 <p>{product.desc}</p>
                                 <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">Add to Cart</button>
+                                    <Link to={`/product/${product._id}`} className="btn btn-primary">Add to Cart</Link>
                                 </div>
                             </div>
                         </div>

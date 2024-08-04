@@ -12,6 +12,7 @@ import Home from './pages/Home/Home.jsx';
 import About from './pages/About/About.jsx';
 import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
+import ProductDetails from './pages/ProductDetails/ProductDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,22 +20,27 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
-     {
-      path: '/',
-      element: <Home />
-     },
-     {
-      path: '/about',
-      element: <About />
-     },
-     {
-      path: '/login',
-      element: <Login />
-     },
-     {
-      path: '/register',
-      element: <Register />
-     }
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/about',
+        element: <About />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/register',
+        element: <Register />
+      },
+      {
+        path: '/product/:id',
+        element: <ProductDetails />
+      }
+
     ]
   },
 ]);
