@@ -7,22 +7,14 @@ const Product = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-
-        // .....................................................
         axios.get('http://localhost:5000/products')
-        // .then(data=>setProducts(data.data))
         .then(data=>setProducts(data.data))
-        // .....................................................
-
-
     }, [])
-
-   
 
   
     return (
         <div>
-            <h3 className="text-2xl md:text-5xl font-bold text-center my-3 md:my-10">Products</h3>
+            <h3 className="text-2xl md:text-5xl font-bold text-center my-3 md:my-10">All Products</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 
                 {

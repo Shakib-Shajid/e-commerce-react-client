@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Register = () => {
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="card w-full md:w-2/4">
@@ -30,10 +31,12 @@ const Register = () => {
                         </label>
                         <input type="password" placeholder="Confirm Password" className="input input-bordered" required />
                     </div>
+                
+
                     <div className="form-control mt-6">
                         <button className="btn btn-primary">Sign Up</button>
                     </div>
-                    <small>Already have an account? <span className="font-bold"><Link to="/register" className="text-blue-700 text-bold">Click Here</Link></span></small>
+                    <small>Already have an account? <span className="font-bold"><Link to="/login" className="text-blue-700 text-bold">Click Here</Link></span></small>
                 </form>
             </div>
         </div>
