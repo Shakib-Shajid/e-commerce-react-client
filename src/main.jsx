@@ -8,12 +8,34 @@ import {
 } from "react-router-dom";
 import Root from './routes/root.jsx';
 import ErrorPage from "./error-page";
+import Home from './pages/Home/Home.jsx';
+import About from './pages/About/About.jsx';
+import Login from './pages/Login/Login.jsx';
+import Register from './pages/Register/Register.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
+    children: [
+     {
+      path: '/',
+      element: <Home />
+     },
+     {
+      path: '/about',
+      element: <About />
+     },
+     {
+      path: '/login',
+      element: <Login />
+     },
+     {
+      path: '/register',
+      element: <Register />
+     }
+    ]
   },
 ]);
 
