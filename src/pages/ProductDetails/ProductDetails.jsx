@@ -25,10 +25,11 @@ const ProductDetails = () => {
     const handleCart = () => {
         const name = sproduct.name;
         const price = sproduct.price;
+        const img = sproduct.img;
         const email = user.email;
         const pid = sproduct._id;
 
-        const cart = { name, price, email, pid }
+        const cart = { name, price, img, email, pid }
 
         axios.post('http://localhost:5000/carts', cart)
             .then(data => {
