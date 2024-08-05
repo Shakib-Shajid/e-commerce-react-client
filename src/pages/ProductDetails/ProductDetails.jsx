@@ -20,7 +20,6 @@ const ProductDetails = () => {
             setSproduct(data.data)
         })
 
-
     // const [carts, setCarts] = useState([])
 
     const handleCart = () => {
