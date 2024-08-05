@@ -6,7 +6,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const Navbar = () => {
 
     const {user, logOut} = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
 
     const navLink = 
     <>
@@ -41,7 +41,7 @@ const Navbar = () => {
                             {navLink}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">E-Commerce</a>
+                    <Link to='/' className="btn btn-ghost text-xl">E-Commerce</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

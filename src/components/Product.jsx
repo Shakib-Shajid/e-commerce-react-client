@@ -8,10 +8,10 @@ const Product = () => {
 
     useEffect(() => {
         axios.get('http://localhost:5000/products')
-        .then(data=>setProducts(data.data))
+            .then(data => setProducts(data.data))
     }, [])
 
-  
+
     return (
         <div>
             <h3 className="text-2xl md:text-5xl font-bold text-center my-3 md:my-10">All Products</h3>
@@ -28,8 +28,9 @@ const Product = () => {
                             <div className="card-body">
                                 <h2 className="card-title">{product.name}</h2>
                                 <p>{product.desc}</p>
+                                <p className="font-bold">Price: ${product.price}</p>
                                 <div className="card-actions justify-end">
-                                    <Link to={`/product/${product._id}`} className="btn btn-primary">Add to Cart</Link>
+                                    <Link to={`/product/${product._id}`} className="btn btn-primary">Details</Link>
                                 </div>
                             </div>
                         </div>
