@@ -9,8 +9,6 @@ const Cart = () => {
 
     const [carts, setCarts] = useState([]);
 
-
-
     // show products
     axios.get(`http://localhost:5000/carts?email=${user.email}`)
         .then(data => {
@@ -19,8 +17,6 @@ const Cart = () => {
 
     // delete a product
     const handleDelete = _id => {
-        // axios.delete(`http://localhost:5000/carts/${_id}`)
-        // .then(data => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -51,6 +47,7 @@ const Cart = () => {
 
     return (
         <div className="max-w-4xl mx-auto">
+            <h3>Email: {user.email}</h3>
             <table className="table border-red-600 border-2 text-lg">
                 {/* head */}
                 <thead>
@@ -75,29 +72,28 @@ const Cart = () => {
                                             </div>
                                         </div>
                                         <div>
-                                            {/* <Link to={${`/`}}></Link> */}
-                                            <div className="font-bold">{cart.name}</div>
-                                        </div>
+                                            <Link className="font-bold" to={`/product/${cart.pid}`}>{cart.name}</Link>
                                     </div>
-                                </td>
+                                </div>
+                            </td>
 
-                                <td>${cart.price}</td>
-                                <td>
-                                    <button className="btn btn-warning" onClick={() => handleDelete(cart._id)}>X</button>
-                                </td>
-                            </tr>
+                            <td>${cart.price}</td>
+                            <td>
+                                <button className="btn btn-warning" onClick={() => handleDelete(cart._id)}>X</button>
+                            </td>
+                        </tr>
 
                         </tbody>
                     )}
 
-                <tfoot className="text-base font-medium">
-                    <tr className=" text-black">
-                        <th>Products: {carts.length}</th>
-                        <th>Price: $510</th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+            <tfoot className="text-base font-medium">
+                <tr className=" text-black">
+                    <th>Products: {carts.length}</th>
+                    <th>Price: $510</th>
+                </tr>
+            </tfoot>
+        </table>
+        </div >
     );
 };
 
