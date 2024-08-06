@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
 
-    const {signIn} = useContext(AuthContext);
+    const { signIn } = useContext(AuthContext);
 
     const handleSignIn = event => {
         event.preventDefault();
@@ -14,11 +15,14 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         const cpassword = form.cpassword.value;
-        
+
         signIn(email, password)
-        .then(result=>{
-            const user = result.user;
-            console.log(user);
+            .then(result => {
+                updateProfile(result.user, {
+                    displayName: name, 
+                    // photoURL: "https://example.com/jane-q-user/profile.jpg"
+                  })
+
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -26,15 +30,16 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-        })
-        .catch((error) => {
-            Swal.fire({
-                icon: "error",
-                title: error.code,
-              });
-          });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: error.code,
+                });
+            });
 
     }
+
 
     return (
         <div className="hero bg-base-200 min-h-screen">
