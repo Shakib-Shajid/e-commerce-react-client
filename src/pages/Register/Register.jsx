@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Register = () => {
+
+
 
     const { signIn } = useContext(AuthContext);
 
@@ -16,12 +21,31 @@ const Register = () => {
         const password = form.password.value;
         const cpassword = form.cpassword.value;
 
+        if(password !== cpassword){
+            Swal.fire({
+                icon: "error",
+                title: "Password Does not Match",
+              });
+              return ;
+        }
+
+        // let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]{6,15}$/;
+
+        // if (!regex.test(password)) {
+        //     Swal.fire({
+        //         icon: "error",
+        //         text: "Must use at least 1 lower character, 1 upper character and 1 special character",
+        //     });
+        //     return;
+        // }
+
+
         signIn(email, password)
             .then(result => {
                 updateProfile(result.user, {
-                    displayName: name, 
+                    displayName: name,
                     // photoURL: "https://example.com/jane-q-user/profile.jpg"
-                  })
+                })
 
                 Swal.fire({
                     position: "top-end",
@@ -78,6 +102,7 @@ const Register = () => {
                     <small>Already have an account? <span className="font-bold"><Link to="/login" className="text-blue-700 text-bold">Click Here</Link></span></small>
                 </form>
             </div>
+
         </div>
     );
 };
