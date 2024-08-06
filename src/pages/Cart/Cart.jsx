@@ -2,15 +2,14 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const { user, loading } = useContext(AuthContext);
 
     const [carts, setCarts] = useState([]);
 
-    if (loading) {
-        return <span className="loading loading-bars loading-lg"></span>
-    }
+
 
     // show products
     axios.get(`http://localhost:5000/carts?email=${user.email}`)
@@ -20,33 +19,37 @@ const Cart = () => {
 
     // delete a product
     const handleDelete = _id => {
-        axios.delete(`http://localhost:5000/carts/${_id}`)
-            .then(data => {
+        // axios.delete(`http://localhost:5000/carts/${_id}`)
+        // .then(data => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/carts/${_id}`)
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                    }
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
                 });
-            })
+            }
+        });
+
+        //     }
+        // )
+    }
+
+    if (loading) {
+        return <span className="loading loading-bars loading-lg"></span>
     }
 
 
     return (
-
-
-
         <div className="max-w-4xl mx-auto">
             <table className="table border-red-600 border-2 text-lg">
                 {/* head */}
@@ -72,6 +75,7 @@ const Cart = () => {
                                             </div>
                                         </div>
                                         <div>
+                                            {/* <Link to={${`/`}}></Link> */}
                                             <div className="font-bold">{cart.name}</div>
                                         </div>
                                     </div>
@@ -79,7 +83,7 @@ const Cart = () => {
 
                                 <td>${cart.price}</td>
                                 <td>
-                                    <button className="btn btn-warning" onClick={()=>handleDelete(cart._id)}>X</button>
+                                    <button className="btn btn-warning" onClick={() => handleDelete(cart._id)}>X</button>
                                 </td>
                             </tr>
 
