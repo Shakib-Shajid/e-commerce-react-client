@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
 
-    const {loginUser} = useContext(AuthContext);
+    const { loginUser } = useContext(AuthContext);
 
     const location = useLocation()
     const navigate = useNavigate();
@@ -17,33 +18,44 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        
+
         loginUser(email, password)
-        .then(result=>{
-            const user = result.user;
-            console.log(user);
+            .then(result => {
+                const loggedInUser = result.user;
+                // console.log(loggedInUser);
+                // Swal.fire({
+                //     position: "top-end",
+                //     icon: "success",
+                //     title: "Login Successfully",
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // });
+
+                const user = { email };
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.success) {
+                            navigate(from, { replace: true })
+                        }
+                    })
+
+
+
+            })
+            .catch((error) => {
                 Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Login Successfully",
-                    showConfirmButton: false,
-                    timer: 1500
+                    icon: "error",
+                    title: error.code,
                 });
-                navigate(from, {replace: true})
-        })
-        .catch((error) => {
-            Swal.fire({
-                icon: "error",
-                title: error.code,
-              });
-          });
+            });
 
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="card w-full md:w-2/4">
                 <h3 className="text-xl md:text-3xl font-bold text-center mt-5">Login Form</h3>
-                <form className="card-body" onSubmit= {handleLogin}>
+                <form className="card-body" onSubmit={handleLogin}>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>

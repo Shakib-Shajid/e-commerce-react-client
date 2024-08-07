@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -11,10 +11,13 @@ const Cart = () => {
 
 
     // show products
-    axios.get(`http://localhost:5000/carts?email=${user.email}`)
-        .then(data => {
-            setCarts(data.data)
-        })
+    const url = `http://localhost:5000/carts?email=${user.email}`
+    useEffect(() => {
+        axios.get(url, { withCredentials: true })
+            .then(data => {
+                setCarts(data.data)
+            })
+    }, [url])
 
     // delete a product
     const handleDelete = _id => {
@@ -125,6 +128,8 @@ const Cart = () => {
                     <tr className=" text-black">
                         <th>Products: {carts.length}</th>
                         <th>Price: $510</th>
+                        <Link to='/' className="btn btn-success text-white">Payment</Link>
+
                     </tr>
                 </tfoot>
             </table>
