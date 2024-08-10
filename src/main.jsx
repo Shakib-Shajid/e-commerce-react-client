@@ -16,6 +16,7 @@ import ProductDetails from './pages/ProductDetails/ProductDetails.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
 import PrivateRoutes from './routes/PrivateRoutes.jsx';
 import Cart from './pages/Cart/Cart.jsx';
+import CartDetails from './pages/Cart/CartDetails.jsx';
 
 
 const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/product/:id',
         element: <PrivateRoutes><ProductDetails /></PrivateRoutes>
+      },
+      {
+        path: '/cart/:id',
+        element: <PrivateRoutes><CartDetails /></PrivateRoutes>,
       },
 
     ]

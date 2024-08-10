@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import CartDetails from "./CartDetails";
+
 
 const Cart = () => {
     const { user, loading } = useContext(AuthContext);
@@ -13,33 +13,14 @@ const Cart = () => {
     // show products
     const url = `http://localhost:5000/carts?email=${user.email}`
     useEffect(() => {
-        axios.get(url, { withCredentials: true })
+        axios.get(url, {withCredentials: true}
+        )
             .then(data => {
                 setCarts(data.data)
             })
-    }, [url])
+    }, [])
 
-    // delete a product
-    const handleDelete = _id => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/carts/${_id}`)
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-            }
-        });
-    }
+
 
 
 
@@ -86,53 +67,30 @@ const Cart = () => {
                     </div>
                 </div>
             </div>
-            <table className="table text-lg w-3/4">
-                {/* head */}
-                <thead>
-                    <tr className="text-xl text-black">
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                {
-                    carts.map(cart =>
+            <div>
 
-                        <tbody key={cart._id}>
+                {/* .................................................. */}
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
                             <tr>
-                                <td>
-                                    <div className="flex items-center gap-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle h-12 w-12">
-                                                <img
-                                                    src={cart.img}
-                                                    alt={cart.name} />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <Link className="font-bold" to={`/product/${cart.pid}`}>{cart.name}</Link>
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td id="price">{cart.price}</td>
-                                <td>
-                                    <button className="btn btn-warning" onClick={() => handleDelete(cart._id)}>X</button>
-                                </td>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Delete</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                carts.map(cart => <CartDetails key={cart._id} cart={cart} />)
+                            }
 
                         </tbody>
-                    )}
+                    </table>
+                </div>
 
-                <tfoot className="text-base font-medium">
-                    <tr className=" text-black">
-                        <th>Products: {carts.length}</th>
-                        <th>Price: $510</th>
-                        <Link to='/' className="btn btn-success text-white">Payment</Link>
 
-                    </tr>
-                </tfoot>
-            </table>
+            </div>
         </div >
     );
 };

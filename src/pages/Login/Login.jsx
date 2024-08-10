@@ -22,7 +22,7 @@ const Login = () => {
         loginUser(email, password)
             .then(result => {
                 const loggedInUser = result.user;
-                // console.log(loggedInUser);
+                console.log(loggedInUser);
                 // Swal.fire({
                 //     position: "top-end",
                 //     icon: "success",
@@ -31,8 +31,9 @@ const Login = () => {
                 //     timer: 1500
                 // });
 
-                const user = { email };
-                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                // const user = { email };
+                // axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                axios.post('http://localhost:5000/jwt')
                     .then(res => {
                         console.log(res.data)
                         if (res.data.success) {
