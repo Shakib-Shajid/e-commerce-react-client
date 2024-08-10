@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import axios from "axios";
 import CartDetails from "./CartDetails";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 const Cart = () => {
@@ -9,16 +9,15 @@ const Cart = () => {
 
     const [carts, setCarts] = useState([]);
 
+    const axiosSecure = useAxiosSecure();
+
 
     // show products
-    const url = `http://localhost:5000/carts?email=${user.email}`
+    const url = `/carts?email=${user.email}`
     useEffect(() => {
-        axios.get(url, {withCredentials: true}
-        )
-            .then(data => {
-                setCarts(data.data)
-            })
-    }, [])
+        axiosSecure.get(url)
+        .then(data=>setCarts(data.data))
+    }, [url, axiosSecure])
 
 
 

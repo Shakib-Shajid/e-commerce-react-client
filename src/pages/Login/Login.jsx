@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import axios from "axios";
+import useAuth from '../../hooks/useAuth'
 
 const Login = () => {
 
-    const { loginUser } = useContext(AuthContext);
+    const { loginUser } = useAuth();
 
     const location = useLocation()
     const navigate = useNavigate();
@@ -23,13 +22,13 @@ const Login = () => {
             .then(result => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
-                // Swal.fire({
-                //     position: "top-end",
-                //     icon: "success",
-                //     title: "Login Successfully",
-                //     showConfirmButton: false,
-                //     timer: 1500
-                // });
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
                 // const user = { email };
                 // axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
