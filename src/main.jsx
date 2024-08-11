@@ -19,6 +19,15 @@ import Cart from './pages/Cart/Cart.jsx';
 import CartDetails from './pages/Cart/CartDetails.jsx';
 
 
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,7 +57,7 @@ const router = createBrowserRouter([
       {
         path: '/product/:id',
         element: <PrivateRoutes><ProductDetails /></PrivateRoutes>,
-        loader: ({params})=>fetch(`http://localhost:5000/product/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
       },
       {
         path: '/cart/:id',
@@ -62,8 +71,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )

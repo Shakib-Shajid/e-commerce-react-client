@@ -1,16 +1,32 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Product = () => {
 
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/products')
-            .then(data => setProducts(data.data))
-    }, [])
+    // useEffect(() => {
+    //     axios.get('http://localhost:5000/products')
+    //         .then(data => setProducts(data.data))
+    // }, [])
 
+    const {isPending, error, isError ,data:products } = useQuery({
+        queryKey: ['products'],
+        queryFn : async() =>{
+            const res = await fetch('http://localhost:5000/products')
+            return res.json();
+        }
+    });
+
+    if(isPending){
+        return <span className="loading loading-ring loading-lg"></span>
+    }
+
+    if(isError){
+        return <p>{error.message}</p>
+    }
 
     return (
         <div>
